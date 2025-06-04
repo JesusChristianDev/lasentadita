@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La Sentadita</title>
+    <!-- TailwindCSS para utilidades y layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link rel="stylesheet">
+    <!-- Swiper para carrusel de bienvenida -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- =========================
+             Pantalla de bienvenida (carrusel)
+             ========================= -->
+        <section id="welcome-screen" class="screen active">
+            <!-- Selector de idioma -->
+            <nav id="language-selection" class="absolute top-8 left-0 right-0 flex justify-center gap-4 z-20">
+                <button class="lang-btn text-2xl bg-transparent border-none cursor-pointer" data-lang="es"
+                    aria-label="Español">🇪🇸</button>
+                <button class="lang-btn text-2xl bg-transparent border-none cursor-pointer" data-lang="en"
+                    aria-label="English">🇬🇧</button>
+                <button class="lang-btn text-2xl bg-transparent border-none cursor-pointer" data-lang="fr"
+                    aria-label="Français">🇫🇷</button>
+                <button class="lang-btn text-2xl bg-transparent border-none cursor-pointer" data-lang="de"
+                    aria-label="Deutsch">🇩🇪</button>
+                <button class="lang-btn text-2xl bg-transparent border-none cursor-pointer" data-lang="ru"
+                    aria-label="Русский">🇷🇺</button>
+            </nav>
+            <!-- Carrusel de slides de bienvenida -->
+            <div class="swiper welcome-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1: Bienvenida -->
+                    <div class="swiper-slide welcome-slide bg-cover bg-center"
+                        style="background-image: url('https://cdn.pixabay.com/photo/2018/09/14/11/12/food-3676796_1280.jpg')">
+                        <div class="slide-content">
+                            <h2 class="slide-title">Bienvenido a <span class="gold-text">La Sentadita</span></h2>
+                            <p class="slide-description">Una experiencia gastronómica única en el corazón de la ciudad
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Slide 2: Cocina -->
+                    <div class="swiper-slide welcome-slide bg-cover bg-center"
+                        style="background-image: url('https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg')">
+                        <div class="slide-content">
+                            <h2 class="slide-title">Cocina <span class="gold-text">Auténtica</span></h2>
+                            <p class="slide-description">Sabores tradicionales con un toque moderno y elegante</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3: Ambiente -->
+                    <div class="swiper-slide welcome-slide bg-cover bg-center"
+                        style="background-image: url('https://cdn.pixabay.com/photo/2014/09/17/20/26/restaurant-449952_1280.jpg')">
+                        <div class="slide-content">
+                            <h2 class="slide-title">Ambiente <span class="gold-text">Sofisticado</span></h2>
+                            <p class="slide-description">Un espacio diseñado para disfrutar cada momento</p>
+                            <button id="start-button" class="gold-button w-full mt-4">Empezar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+        <!-- =========================
+             Pantalla principal (Home)
+             ========================= -->
+        <section id="home-screen" class="screen">
+            <div class="px-4 pt-6 pb-2">
+                <!-- Saludo y banner de bienvenida -->
+                <h2 class="greeting text-xl font-bold mb-2">Hola, <span class="gold-text" id="userName">Usuario</span>
+                </h2>
+                <div
+                    class="rounded-2xl bg-gradient-to-r from-yellow-400/80 to-yellow-200/80 text-black p-5 mb-5 shadow-lg flex flex-col items-center">
+                    <div class="text-lg font-semibold mb-1">¡Bienvenido a La Sentadita!</div>
+                    <div class="text-base mb-2">Descubre experiencias gastronómicas únicas y eventos exclusivos.</div>
+                </div>
+                <!-- Programa de fidelidad -->
+                <div class="mb-6">
+                    <div class="text-base font-semibold mb-2 gold-text">Tu programa de fidelidad</div>
+                    <div class="bg-[#232323] rounded-xl p-4 flex items-center gap-4 shadow">
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="text-3xl font-bold gold-text">320</div>
+                            <div class="text-xs text-gold">Puntos</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm mb-1">¡Sigue acumulando puntos y desbloquea recompensas!</div>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 64%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">Te faltan <span
+                                    class="gold-text font-semibold">180</span> puntos para tu próxima recompensa.</div>
+                        </div>
+                        <button
+                            class="ml-2 px-3 py-2 rounded-lg bg-gold text-black font-bold text-xs shadow hover:bg-yellow-300 transition">Ver
+                            premios</button>
+                    </div>
+                </div>
+                <!-- Eventos destacados -->
+                <div class="mb-6">
+                    <div class="text-base font-semibold mb-2">Próximos eventos destacados</div>
+                    <div class="featured-events flex gap-3 overflow-x-auto pb-2">
+                        <!-- Renderizado dinámico desde JS -->
+                    </div>
+                </div>
+                <!-- Accesos rápidos -->
+                <div class="mb-6">
+                    <div class="text-base font-semibold mb-2">Accesos rápidos</div>
+                    <div class="flex gap-4">
+                        <button
+                            class="flex-1 bg-gold text-black font-bold py-3 rounded-xl shadow hover:bg-yellow-300 transition flex flex-col items-center open-reservation-btn">
+                            <i class="fas fa-calendar-plus text-xl mb-1"></i>
+                            Reservar mesa
+                        </button>
+                        <button
+                            class="flex-1 bg-[#232323] text-gold font-bold py-3 rounded-xl shadow hover:bg-yellow-900/30 transition flex flex-col items-center">
+                            <i class="fas fa-gift text-xl mb-1"></i>
+                            Mis premios
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =========================
+             Pantalla de detalles de restaurante
+             ========================= -->
+        <section id="restaurant-details-screen" class="screen">
+            <!-- Renderizado dinámico desde JS -->
+        </section>
+        <!-- =========================
+             Modal de reserva
+             ========================= -->
+        <div id="reservation-modal"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 hidden">
+            <div class="bg-[#232323] rounded-2xl p-6 w-[90vw] max-w-md shadow-xl relative">
+                <button id="close-reservation-modal" class="absolute top-3 right-3 text-gold text-xl"><i
+                        class="fas fa-times"></i></button>
+                <h3 class="text-lg font-bold mb-4" id="reservation-modal-title">Reservar mesa</h3>
+                <form id="reservation-form" class="flex flex-col gap-4">
+                    <input type="hidden" name="restaurantId" id="reservation-restaurant-id">
+                    <div id="reservation-restaurant-select-wrapper" class="mb-2 hidden">
+                        <label class="block mb-1 text-sm font-semibold"
+                            for="reservation-restaurant-select">Restaurante</label>
+                        <select id="reservation-restaurant-select"
+                            class="w-full rounded px-3 py-2 bg-neutral-800 text-white">
+                            <option value="">Selecciona restaurante</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-semibold" for="reservation-date">Fecha</label>
+                        <input type="date" id="reservation-date" name="date"
+                            class="w-full rounded px-3 py-2 bg-neutral-800 text-white" required min="2025-05-28">
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-semibold" for="reservation-time">Hora</label>
+                        <input type="time" id="reservation-time" name="time"
+                            class="w-full rounded px-3 py-2 bg-neutral-800 text-white" required>
+                    </div>
+                    <div>
+                        <label class="block mb-1 text-sm font-semibold" for="reservation-guests">Personas</label>
+                        <input type="number" id="reservation-guests" name="guests"
+                            class="w-full rounded px-3 py-2 bg-neutral-800 text-white" min="1" max="20" required>
+                    </div>
+                    <button type="submit" class="gold-button w-full mt-2">Confirmar reserva</button>
+                    <div id="reservation-error" class="text-red-400 text-sm mt-2 hidden"></div>
+                </form>
+            </div>
+        </div>
+        <!-- =========================
+             Pantalla de listado de restaurantes
+             ========================= -->
+        <section id="restaurants-screen" class="screen">
+            <h2 class="greeting px-4 pt-6 pb-2 text-xl font-bold">Restaurantes</h2>
+            <div class="restaurant-list">
+                <!-- Renderizado dinámico desde JS -->
+            </div>
+        </section>
+        <!-- =========================
+             Pantalla de eventos
+             ========================= -->
+        <section id="events-screen" class="screen">
+            <h2 class="py-5 text-2xl mb-0 px-4">Eventos</h2>
+            <div class="filter-bar flex gap-2 px-4 overflow-x-auto pb-2">
+                <div class="filter-button active">Todos</div>
+                <div class="filter-button">Música</div>
+                <div class="filter-button">Gastronomía</div>
+                <div class="filter-button">Catas</div>
+                <div class="filter-button">Especiales</div>
+            </div>
+            <div class="events-list px-4">
+                <!-- Renderizado dinámico desde JS -->
+            </div>
+        </section>
+        <!-- =========================
+             Pantalla de perfil de usuario
+             ========================= -->
+        <section id="profile-screen" class="screen">
+            <div class="profile-header flex items-center px-4 pt-6 pb-2">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    class="profile-avatar" alt="Profile">
+                <div class="profile-info ml-4">
+                    <div class="profile-name" id="profileName"></div>
+                    <div class="profile-email"></div>
+                </div>
+            </div>
+            <div class="reservations-section px-4">
+                <!-- Aquí se renderizan las reservas dinámicamente -->
+            </div>
+            <div class="settings-section px-4">
+                <h3 class="mb-4 text-lg font-semibold"></h3>
+                <ul class="space-y-2">
+                    <li class="settings-item flex items-center">
+                        <span class="settings-icon"><i class="fas fa-bell"></i></span>
+                        <span class="flex-1"></span>
+                    </li>
+                    <li class="settings-item flex items-center">
+                        <span class="settings-icon"><i class="fas fa-globe"></i></span>
+                        <span class="flex-1"></span>
+                        <select id="settings-lang-select"
+                            class="bg-neutral-900 text-gold border-none text-base outline-none">
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="en">🇬🇧 English</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                            <option value="ru">🇷🇺 Русский</option>
+                        </select>
+                    </li>
+                    <li class="settings-item flex items-center">
+                        <span class="settings-icon"><i class="fas fa-lock"></i></span>
+                        <span class="flex-1"></span>
+                    </li>
+                    <li class="settings-item flex items-center">
+                        <span class="settings-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="flex-1"></span>
+                    </li>
+                </ul>
+                <div id="profile-feedback-msg"></div>
+                <button id="logout-btn" class="logout-button flex items-center gap-2 mt-4"></button>
+            </div>
+        </section>
+        <!-- =========================
+             Barra de navegación inferior (tabs)
+             ========================= -->
+        <nav class="tab-bar flex justify-between items-center">
+            <div class="tab-item active" data-screen="home-screen">
+                <div class="tab-icon"><i class="fas fa-home"></i></div>
+                <div class="tab-label">Home</div>
+            </div>
+            <div class="tab-item" data-screen="restaurants-screen">
+                <div class="tab-icon"><i class="fas fa-utensils"></i></div>
+                <div class="tab-label">Restaurantes</div>
+            </div>
+            <div class="tab-item" data-screen="events-screen">
+                <div class="tab-icon"><i class="fas fa-calendar-alt"></i></div>
+                <div class="tab-label">Eventos</div>
+            </div>
+            <div class="tab-item" data-screen="profile-screen">
+                <div class="tab-icon"><i class="fas fa-user"></i></div>
+                <div class="tab-label">Perfil</div>
+            </div>
+        </nav>
+    </div>
+    <!-- =========================
+         Scripts principales
+         ========================= -->
+    <script src="translations.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
