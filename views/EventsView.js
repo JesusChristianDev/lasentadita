@@ -4,7 +4,7 @@
 
 import { EVENTS } from '../data/events.js';
 import { EventCard } from '../components/EventCard.js';
-import { getLanguage } from '../utils/i18n.js';
+import { getLanguage, t } from '../utils/i18n.js';
 
 export function renderEventsView() {
     const lang = getLanguage();
@@ -14,4 +14,7 @@ export function renderEventsView() {
         const card = EventCard(ev, lang);
         list.appendChild(card);
     });
+    // Ejemplo de uso en renderEventsView:
+    document.querySelector('#events-screen h2').setAttribute('data-i18n', 'eventsTitle');
+    document.querySelector('#events-screen h2').textContent = t('eventsTitle');
 }

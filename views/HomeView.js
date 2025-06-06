@@ -8,6 +8,7 @@ import { EVENTS } from '../data/events.js';
 export function renderHomeView(user) {
   const lang = getLanguage();
   // Saludo y banner principal
+  document.querySelector('#home-screen .greeting').setAttribute('data-i18n', 'greeting');
   document.querySelector('#home-screen .greeting').innerHTML = `${t('greeting')} <span class="gold-text" id="userName">${user?.name || 'Invitado'}</span>`;
   document.querySelector('#home-screen .rounded-2xl .text-lg').textContent = t('welcome1').replace(/<[^>]+>/g, '');
   document.querySelector('#home-screen .rounded-2xl .text-base').textContent = t('desc1').replace(/<[^>]+>/g, '');

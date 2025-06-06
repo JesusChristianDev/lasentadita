@@ -23,6 +23,7 @@
         <!-- =========================
              Pantalla de bienvenida (carrusel)
              ========================= -->
+        <!-- Pantalla de bienvenida (carrusel) -->
         <section id="welcome-screen" class="screen active">
             <!-- Selector de idioma -->
             <nav id="language-selection" class="absolute top-8 left-0 right-0 flex justify-center gap-4 z-20">
@@ -44,26 +45,33 @@
                     <div class="swiper-slide welcome-slide bg-cover bg-center"
                         style="background-image: url('https://cdn.pixabay.com/photo/2018/09/14/11/12/food-3676796_1280.jpg')">
                         <div class="slide-content">
-                            <h2 class="slide-title">Bienvenido a <span class="gold-text">La Sentadita</span></h2>
-                            <p class="slide-description">Una experiencia gastronómica única en el corazón de la ciudad
-                            </p>
+                            <h2 class="slide-title" data-i18n-html data-i18n="welcome1">Bienvenido a <span
+                                    class="gold-text">La Sentadita</span></h2>
+                            <p class="slide-description" data-i18n="desc1">Una experiencia gastronómica única en el
+                                corazón de
+                                la ciudad</p>
                         </div>
                     </div>
                     <!-- Slide 2: Cocina -->
                     <div class="swiper-slide welcome-slide bg-cover bg-center"
                         style="background-image: url('https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg')">
                         <div class="slide-content">
-                            <h2 class="slide-title">Cocina <span class="gold-text">Auténtica</span></h2>
-                            <p class="slide-description">Sabores tradicionales con un toque moderno y elegante</p>
+                            <h2 class="slide-title" data-i18n-html data-i18n="welcome2">Cocina <span
+                                    class="gold-text">Auténtica</span></h2>
+                            <p class="slide-description" data-i18n="desc2">Sabores tradicionales con un toque moderno y
+                                elegante</p>
                         </div>
                     </div>
                     <!-- Slide 3: Ambiente -->
                     <div class="swiper-slide welcome-slide bg-cover bg-center"
                         style="background-image: url('https://cdn.pixabay.com/photo/2014/09/17/20/26/restaurant-449952_1280.jpg')">
                         <div class="slide-content">
-                            <h2 class="slide-title">Ambiente <span class="gold-text">Sofisticado</span></h2>
-                            <p class="slide-description">Un espacio diseñado para disfrutar cada momento</p>
-                            <button id="start-button" class="gold-button w-full mt-4">Empezar</button>
+                            <h2 class="slide-title" data-i18n-html data-i18n="welcome3">Ambiente <span
+                                    class="gold-text">Sofisticado</span></h2>
+                            <p class="slide-description" data-i18n="desc3">Un espacio diseñado para disfrutar cada
+                                momento
+                            </p>
+                            <button id="start-button" class="gold-button w-full mt-4" data-i18n="start">Empezar</button>
                         </div>
                     </div>
                 </div>
@@ -73,55 +81,63 @@
         <!-- =========================
              Pantalla principal (Home)
              ========================= -->
+        <!-- Pantalla principal (Home) -->
         <section id="home-screen" class="screen">
             <div class="px-4 pt-6 pb-2">
                 <!-- Saludo y banner de bienvenida -->
-                <h2 class="greeting text-xl font-bold mb-2">Hola, <span class="gold-text" id="userName">Usuario</span>
-                </h2>
+                <h2 class="greeting text-xl font-bold mb-2"><span class="gold-text" id="userName"></span></h2>
                 <div
                     class="rounded-2xl bg-gradient-to-r from-yellow-400/80 to-yellow-200/80 text-black p-5 mb-5 shadow-lg flex flex-col items-center">
-                    <div class="text-lg font-semibold mb-1">¡Bienvenido a La Sentadita!</div>
-                    <div class="text-base mb-2">Descubre experiencias gastronómicas únicas y eventos exclusivos.</div>
+                    <div class="text-lg font-semibold mb-1" data-i18n="homeWelcome">¡Bienvenido a La Sentadita!</div>
+                    <div class="text-base mb-2" data-i18n="homeDesc">Descubre experiencias gastronómicas únicas y
+                        eventos
+                        exclusivos.</div>
                 </div>
                 <!-- Programa de fidelidad -->
                 <div class="mb-6">
-                    <div class="text-base font-semibold mb-2 gold-text">Tu programa de fidelidad</div>
+                    <div class="text-base font-semibold mb-2 gold-text" data-i18n="loyaltyTitle">Tu programa de
+                        fidelidad</div>
                     <div class="bg-[#232323] rounded-xl p-4 flex items-center gap-4 shadow">
                         <div class="flex flex-col items-center justify-center">
                             <div class="text-3xl font-bold gold-text">320</div>
-                            <div class="text-xs text-gold">Puntos</div>
+                            <div class="text-xs text-gold" data-i18n="points">Puntos</div>
                         </div>
                         <div class="flex-1">
-                            <div class="text-sm mb-1">¡Sigue acumulando puntos y desbloquea recompensas!</div>
+                            <div class="text-sm mb-1" data-i18n="keepEarning">¡Sigue acumulando puntos y desbloquea
+                                recompensas!</div>
                             <div class="w-full bg-gray-700 rounded-full h-2.5">
                                 <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 64%"></div>
                             </div>
-                            <div class="text-xs text-gray-400 mt-1">Te faltan <span
-                                    class="gold-text font-semibold">180</span> puntos para tu próxima recompensa.</div>
+                            <div class="text-xs text-gray-400 mt-1" data-i18n-html data-i18n="nextReward">Te faltan
+                                <span class="gold-text font-semibold">180</span> puntos
+                                para tu próxima recompensa.</div>
                         </div>
                         <button
-                            class="ml-2 px-3 py-2 rounded-lg bg-gold text-black font-bold text-xs shadow hover:bg-yellow-300 transition">Ver
-                            premios</button>
+                            class="ml-2 px-3 py-2 rounded-lg bg-gold text-black font-bold text-xs shadow hover:bg-yellow-300 transition"
+                            data-i18n="seeRewards">Ver premios</button>
                     </div>
                 </div>
                 <!-- Eventos destacados -->
                 <div class="mb-6">
-                    <div class="text-base font-semibold mb-2">Próximos eventos destacados</div>
+                    <div class="text-base font-semibold mb-2" data-i18n="upcomingEvents">Próximos eventos destacados
+                    </div>
                     <div class="featured-events flex gap-3 overflow-x-auto pb-2">
                         <!-- Renderizado dinámico desde JS -->
                     </div>
                 </div>
                 <!-- Accesos rápidos -->
                 <div class="mb-6">
-                    <div class="text-base font-semibold mb-2">Accesos rápidos</div>
+                    <div class="text-base font-semibold mb-2" data-i18n="quickAccess">Accesos rápidos</div>
                     <div class="flex gap-4">
                         <button
-                            class="flex-1 bg-gold text-black font-bold py-3 rounded-xl shadow hover:bg-yellow-300 transition flex flex-col items-center open-reservation-btn">
+                            class="flex-1 bg-gold text-black font-bold py-3 rounded-xl shadow hover:bg-yellow-300 transition flex flex-col items-center open-reservation-btn"
+                            data-i18n="reservationBtn">
                             <i class="fas fa-calendar-plus text-xl mb-1"></i>
                             Reservar mesa
                         </button>
                         <button
-                            class="flex-1 bg-[#232323] text-gold font-bold py-3 rounded-xl shadow hover:bg-yellow-900/30 transition flex flex-col items-center">
+                            class="flex-1 bg-[#232323] text-gold font-bold py-3 rounded-xl shadow hover:bg-yellow-900/30 transition flex flex-col items-center rewards-btn"
+                            data-i18n="myRewards">
                             <i class="fas fa-gift text-xl mb-1"></i>
                             Mis premios
                         </button>
@@ -249,29 +265,29 @@
         <!-- =========================
              Barra de navegación inferior (tabs)
              ========================= -->
-        <nav class="tab-bar flex justify-between items-center">
+        <!-- Pantalla de perfil de usuario y tabs -->
+        <nav id="tab-bar" class="tab-bar flex justify-between items-center hidden">
             <div class="tab-item active" data-screen="home-screen">
                 <div class="tab-icon"><i class="fas fa-home"></i></div>
-                <div class="tab-label">Home</div>
+                <div class="tab-label" data-i18n="tabHome">Home</div>
             </div>
             <div class="tab-item" data-screen="restaurants-screen">
                 <div class="tab-icon"><i class="fas fa-utensils"></i></div>
-                <div class="tab-label">Restaurantes</div>
+                <div class="tab-label" data-i18n="tabRestaurants">Restaurantes</div>
             </div>
             <div class="tab-item" data-screen="events-screen">
-                <div class="tab-icon"><i class="fas fa-calendar-alt"></i></div>
-                <div class="tab-label">Eventos</div>
+                <div class="tab-icon"><i class="fas fa-calendar"></i></div>
+                <div class="tab-label" data-i18n="tabEvents">Eventos</div>
             </div>
             <div class="tab-item" data-screen="profile-screen">
                 <div class="tab-icon"><i class="fas fa-user"></i></div>
-                <div class="tab-label">Perfil</div>
+                <div class="tab-label" data-i18n="tabProfile">Perfil</div>
             </div>
         </nav>
     </div>
     <!-- =========================
          Scripts principales
          ========================= -->
-    <script src="translations.js"></script>
     <script type="module" src="app.js"></script>
 </body>
 

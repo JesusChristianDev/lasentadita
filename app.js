@@ -8,7 +8,7 @@ import { renderHomeView } from './views/HomeView.js';
 import { renderProfileView } from './views/ProfileView.js';
 import { renderRestaurantDetailsView } from './views/RestaurantDetailsView.js';
 import { showAuthView } from './views/AuthView.js';
-import { t, setLanguage, getLanguage } from './utils/i18n.js';
+import { t, setLanguage, getLanguage, initI18n } from './utils/i18n.js';
 import { showScreen } from './utils/navigation.js';
 import { getUser, saveUser, clearUser } from './utils/storage.js';
 
@@ -80,6 +80,7 @@ function handleWelcomeActions() {
         console.log("Botón Empezar PRESIONADO");
         // Refuerzo: siempre ocultar barra antes de mostrar auth
         document.body.classList.remove('show-tab-bar');
+        showTabBar(false);
         showAuthView({
           onLogin: (userData) => {
             if (!isValidUser(userData)) {
@@ -96,6 +97,7 @@ function handleWelcomeActions() {
             renderMainApp();
             setMobileViewport(); // Refuerzo tras login
             document.body.classList.add('show-tab-bar');
+            showTabBar(true);
           },
           onRegister: (userData) => {
             if (!isValidUser(userData)) {
@@ -112,6 +114,7 @@ function handleWelcomeActions() {
             renderMainApp();
             setMobileViewport(); // Refuerzo tras registro
             document.body.classList.add('show-tab-bar');
+            showTabBar(true);
           },
           onGuest: () => {
             user = { name: t('profileName') || 'Invitado' };
@@ -119,6 +122,7 @@ function handleWelcomeActions() {
             renderMainApp();
             setMobileViewport(); // Refuerzo tras invitado
             document.body.classList.add('show-tab-bar');
+            showTabBar(true);
           }
         });
       };
@@ -129,6 +133,7 @@ function handleWelcomeActions() {
   addStartBtnListener();
   // Refuerzo: al mostrar bienvenida, siempre ocultar barra
   document.body.classList.remove('show-tab-bar');
+  showTabBar(false);
 }
 
 // =========================
@@ -145,6 +150,7 @@ function renderMainApp() {
   showScreen('home-screen');
   setMobileViewport(); // Refuerzo: asegura fondo correcto
   document.body.classList.add('show-tab-bar');
+  showTabBar(true);
 }
 
 // =========================
@@ -156,6 +162,7 @@ function handleLogout() {
   showScreen('welcome-screen');
   // Refuerzo: siempre ocultar barra al volver a bienvenida
   document.body.classList.remove('show-tab-bar');
+  showTabBar(false);
 }
 
 // Listener global para el botón de logout
@@ -168,6 +175,21 @@ function addLogoutListener() {
   }
 }
 addLogoutListener();
+
+// =========================
+// Automatización de traducción en el DOM para data-i18n
+// =========================
+function updateI18nDomTexts() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    // Si el elemento tiene data-i18n-html, usar innerHTML (para cadenas con HTML)
+    if (el.hasAttribute('data-i18n-html')) {
+      el.innerHTML = t(key);
+    } else {
+      el.textContent = t(key);
+    }
+  });
+}
 
 // =========================
 // Actualiza textos estáticos del HTML según el idioma
@@ -271,10 +293,23 @@ function updateStaticTexts() {
   if (settingsItems[2]) settingsItems[2].textContent = t('help') || 'Ayuda';
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> ' + (t('logout') || 'Cerrar Sesión');
+  // Al final de la función, actualizar todos los data-i18n
+  updateI18nDomTexts();
 }
 
+// =========================
+// Inicialización de la internacionalización dinámica
+// =========================
+(async function () {
+  await initI18n();
+  window.updateStaticTexts = updateStaticTexts;
+  document.dispatchEvent(new Event('i18n-ready'));
+})();
+
 // Llama a updateStaticTexts en el arranque y tras cada cambio de idioma
-document.addEventListener('DOMContentLoaded', () => {
+// Espera a que i18n esté listo antes de renderizar vistas
+
+document.addEventListener('i18n-ready', () => {
   updateStaticTexts();
   renderHomeView(user);
   renderRestaurantsView(getLanguage(), (id) => {
@@ -285,8 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProfileView();
   showScreen('welcome-screen');
   handleWelcomeActions();
-  // Si hay usuario logueado, inicia sesión automáticamente
-  // ...puedes expandir lógica aquí...
   // Listener para cambio de idioma en bienvenida
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', function () {
@@ -323,8 +356,10 @@ document.querySelectorAll('.tab-item').forEach(tab => {
     // Refuerzo: nunca mostrar barra en bienvenida
     if (this.dataset.screen === 'welcome-screen') {
       document.body.classList.remove('show-tab-bar');
+      showTabBar(false);
     } else {
       document.body.classList.add('show-tab-bar');
+      showTabBar(true);
     }
   });
 });
@@ -385,26 +420,11 @@ startApp();
 // =========================
 // Sincronización global de idioma sin sobrescribir el módulo importado
 // =========================
-window.syncLanguage = function(lang) {
+window.syncLanguage = async function (lang) {
   setLanguage(lang);
+  await initI18n();
   updateStaticTexts();
-  renderHomeView(getUser());
-  renderRestaurantsView(getLanguage(), (id) => {
-    renderRestaurantDetailsView(id, getLanguage(), () => {/* lógica reserva */ });
-    showScreen('restaurant-details-screen');
-  });
-  renderEventsView();
-  renderProfileView();
-  setupReservationFormI18n();
-  // Mantiene activa la pestaña de la pantalla actual
-  const activeScreen = document.querySelector('.screen.active');
-  if (activeScreen) {
-    const tab = document.querySelector('.tab-item[data-screen="' + activeScreen.id + '"]');
-    if (tab) {
-      document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-    }
-  }
+  // Si hay otras vistas que requieren refresco, puedes llamarlas aquí
 };
 
 // =========================
@@ -436,4 +456,15 @@ function setupReservationFormI18n() {
       errorDiv.textContent = t('reservationError') || 'Completa todos los campos correctamente.';
     }
   });
+}
+
+function showTabBar(show) {
+  const tabBar = document.getElementById('tab-bar');
+  if (tabBar) {
+    if (show) {
+      tabBar.classList.remove('hidden');
+    } else {
+      tabBar.classList.add('hidden');
+    }
+  }
 }

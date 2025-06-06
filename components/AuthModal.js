@@ -19,30 +19,30 @@ export function AuthModal({ onLogin, onRegister, onGuest }) {
   modal.innerHTML = `
     <div class="bg-[#232323] rounded-2xl p-6 w-[90vw] max-w-md shadow-xl relative">
       <button id="close-auth-modal" class="absolute top-3 right-3 text-gold text-xl"><i class="fas fa-times"></i></button>
-      <h3 class="text-lg font-bold mb-4">${safeT('authTitle', 'Acceso')}</h3>
+      <h3 class="text-lg font-bold mb-4" data-i18n="authTitle">${t('authTitle')}</h3>
       <div class="flex gap-2 mb-4">
-        <button id="auth-login-tab" class="flex-1 gold-button">${safeT('loginBtn', 'Iniciar sesión')}</button>
-        <button id="auth-register-tab" class="flex-1 bg-neutral-800 text-gold rounded-lg font-bold">${safeT('registerBtn', 'Registrarse')}</button>
+        <button id="auth-login-tab" class="flex-1 gold-button" data-i18n="loginBtn">${t('loginBtn')}</button>
+        <button id="auth-register-tab" class="flex-1 bg-neutral-800 text-gold rounded-lg font-bold" data-i18n="registerBtn">${t('registerBtn')}</button>
       </div>
       <form id="login-form" class="flex flex-col gap-3">
-        <input type="email" id="login-email" class="rounded px-3 py-2 bg-neutral-800 text-white w-full" placeholder="${safeT('email', 'Email')}" required autocomplete="username">
+        <input type="email" id="login-email" class="rounded px-3 py-2 bg-neutral-800 text-white w-full" placeholder="${safeT('email', 'Email')}" required autocomplete="username" data-i18n="email">
         <div class="relative">
-          <input type="password" id="login-password" class="rounded px-3 py-2 bg-neutral-800 text-white w-full pr-10" placeholder="${safeT('password', 'Contraseña')}" required autocomplete="current-password">
-          <button type="button" id="toggle-login-password" tabindex="-1" class="absolute right-2 top-2 text-gold text-lg focus:outline-none" aria-label="${safeT('showHidePassword', 'Mostrar/ocultar contraseña')}"><i class="fas fa-eye"></i></button>
+          <input type="password" id="login-password" class="rounded px-3 py-2 bg-neutral-800 text-white w-full pr-10" placeholder="${safeT('password', 'Contraseña')}" required autocomplete="current-password" data-i18n="password">
+          <button type="button" id="toggle-login-password" tabindex="-1" class="absolute right-2 top-2 text-gold text-lg focus:outline-none" aria-label="${safeT('showHidePassword', 'Mostrar/ocultar contraseña')}" data-i18n="showHidePassword"><i class="fas fa-eye"></i></button>
         </div>
-        <button type="submit" class="gold-button w-full mt-2">${safeT('loginBtn', 'Entrar')}</button>
+        <button type="submit" class="gold-button w-full mt-2" data-i18n="loginBtn">${t('loginBtn')}</button>
       </form>
       <form id="register-form" class="flex flex-col gap-3 hidden">
-        <input type="text" id="register-name" class="rounded px-3 py-2 bg-neutral-800 text-white" placeholder="${safeT('name', 'Nombre')}" required autocomplete="name">
-        <input type="email" id="register-email" class="rounded px-3 py-2 bg-neutral-800 text-white" placeholder="${safeT('email', 'Email')}" required autocomplete="username">
+        <input type="text" id="register-name" class="rounded px-3 py-2 bg-neutral-800 text-white" placeholder="${safeT('name', 'Nombre')}" required autocomplete="name" data-i18n="name">
+        <input type="email" id="register-email" class="rounded px-3 py-2 bg-neutral-800 text-white" placeholder="${safeT('email', 'Email')}" required autocomplete="username" data-i18n="email">
         <div class="relative">
-          <input type="password" id="register-password" class="rounded px-3 py-2 bg-neutral-800 text-white w-full pr-10" placeholder="${safeT('password', 'Contraseña')}" required autocomplete="new-password">
-          <button type="button" id="toggle-register-password" tabindex="-1" class="absolute right-2 top-2 text-gold text-lg focus:outline-none" aria-label="${safeT('showHidePassword', 'Mostrar/ocultar contraseña')}"><i class="fas fa-eye"></i></button>
+          <input type="password" id="register-password" class="rounded px-3 py-2 bg-neutral-800 text-white w-full pr-10" placeholder="${safeT('password', 'Contraseña')}" required autocomplete="new-password" data-i18n="password">
+          <button type="button" id="toggle-register-password" tabindex="-1" class="absolute right-2 top-2 text-gold text-lg focus:outline-none" aria-label="${safeT('showHidePassword', 'Mostrar/ocultar contraseña')}" data-i18n="showHidePassword"><i class="fas fa-eye"></i></button>
         </div>
-        <button type="submit" class="gold-button w-full mt-2">${safeT('registerBtn', 'Crear cuenta')}</button>
+        <button type="submit" class="gold-button w-full mt-2" data-i18n="registerBtn">${t('registerBtn')}</button>
       </form>
-      <button id="guest-access" class="text-gold underline mt-2">${safeT('guestBtn', 'Entrar como invitado')}</button>
-      <div id="auth-error" class="text-red-400 text-sm mt-2 hidden"></div>
+      <button id="guest-access" class="text-gold underline mt-2" data-i18n="guestBtn">${t('guestBtn')}</button>
+      <div id="auth-error" class="text-red-400 text-sm mt-2 hidden" data-i18n="loginError">${t('loginError')}</div>
     </div>
   `;
   // --- LÓGICA DE INTERACCIÓN Y FLUIDEZ UX ---
@@ -129,26 +129,41 @@ export function AuthModal({ onLogin, onRegister, onGuest }) {
     registerPassword.type = isVisible ? 'password' : 'text';
     toggleRegisterPassword.innerHTML = `<i class="fas fa-eye${isVisible ? '' : '-slash'}"></i>`;
   };
-  // Refuerzo: actualizar textos al cambiar idioma globalmente
+  // Refuerzo: actualizar textos y atributos data-i18n al cambiar idioma globalmente
   document.addEventListener('languagechange', () => {
+    modal.querySelector('h3').setAttribute('data-i18n', 'authTitle');
     modal.querySelector('h3').textContent = safeT('authTitle', 'Acceso');
+    loginTab.setAttribute('data-i18n', 'loginBtn');
     loginTab.textContent = safeT('loginBtn', 'Iniciar sesión');
+    registerTab.setAttribute('data-i18n', 'registerBtn');
     registerTab.textContent = safeT('registerBtn', 'Registrarse');
+    loginForm.querySelector('#login-email').setAttribute('data-i18n', 'email');
     loginForm.querySelector('#login-email').placeholder = safeT('email', 'Email');
+    loginForm.querySelector('#login-password').setAttribute('data-i18n', 'password');
     loginForm.querySelector('#login-password').placeholder = safeT('password', 'Contraseña');
+    toggleLoginPassword.setAttribute('data-i18n', 'showHidePassword');
     toggleLoginPassword.setAttribute('aria-label', safeT('showHidePassword', 'Mostrar/ocultar contraseña'));
+    loginForm.querySelector('button[type="submit"]').setAttribute('data-i18n', 'loginBtn');
     loginForm.querySelector('button[type="submit"]').textContent = safeT('loginBtn', 'Entrar');
+    registerForm.querySelector('#register-name').setAttribute('data-i18n', 'name');
     registerForm.querySelector('#register-name').placeholder = safeT('name', 'Nombre');
+    registerForm.querySelector('#register-email').setAttribute('data-i18n', 'email');
     registerForm.querySelector('#register-email').placeholder = safeT('email', 'Email');
+    registerForm.querySelector('#register-password').setAttribute('data-i18n', 'password');
     registerForm.querySelector('#register-password').placeholder = safeT('password', 'Contraseña');
+    toggleRegisterPassword.setAttribute('data-i18n', 'showHidePassword');
     toggleRegisterPassword.setAttribute('aria-label', safeT('showHidePassword', 'Mostrar/ocultar contraseña'));
+    registerForm.querySelector('button[type="submit"]').setAttribute('data-i18n', 'registerBtn');
     registerForm.querySelector('button[type="submit"]').textContent = safeT('registerBtn', 'Crear cuenta');
+    guestBtn.setAttribute('data-i18n', 'guestBtn');
     guestBtn.textContent = safeT('guestBtn', 'Entrar como invitado');
-    // Si hay error visible, actualiza mensaje
+    // Si hay error visible, actualiza mensaje y data-i18n
     if (!errorDiv.classList.contains('hidden')) {
       if (!loginForm.classList.contains('hidden')) {
+        errorDiv.setAttribute('data-i18n', 'loginError');
         errorDiv.textContent = safeT('loginError', 'Introduce email y contraseña.');
       } else {
+        errorDiv.setAttribute('data-i18n', 'registerError');
         errorDiv.textContent = safeT('registerError', 'Completa todos los campos.');
       }
     }

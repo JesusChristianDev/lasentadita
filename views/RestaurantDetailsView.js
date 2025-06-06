@@ -33,7 +33,7 @@ export function renderRestaurantDetailsView(id, onReservation) {
       <div class="tab-content" id="tab-menu">
         ${Object.entries(r.menu || {}).map(([cat, items]) => `
           <div class="mb-2">
-            <div class="font-bold text-gold mb-1">${t('menu' + cat.charAt(0).toUpperCase() + cat.slice(1)) || cat}</div>
+            <div class="font-bold text-gold mb-1" data-i18n="menu${cat.charAt(0).toUpperCase() + cat.slice(1)}">${t('menu' + cat.charAt(0).toUpperCase() + cat.slice(1)) || cat}</div>
             <div class="grid grid-cols-1 gap-2">
               ${items.map(item => `
                 <div class="flex gap-3 items-center bg-neutral-900 rounded-lg p-2">
